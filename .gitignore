@@ -1,0 +1,8 @@
+# Dependacy directories
+node_modules
+
+# dotenv environment variables file
+.env
+
+# generated files
+dist
