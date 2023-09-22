@@ -19,3 +19,20 @@ export const isAuthenticated = async (
     return res.sendStatus(400);
   }
 };
+
+export const isOwner = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  try {
+    const { id } = req.params;
+    const currentUserId = get(req, "identity._id") as string | undefined;
+    if (!currentUserId) return res.sendStatus(403);
+    if (currentUserId.toString() !== id) return res.sendStatus(403);
+    return next();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+};
